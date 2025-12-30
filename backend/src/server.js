@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import notesRouter from "./routes/notes.js";
+import searchRouter from "./routes/search.js";
+import { connectDb } from "./config/db.js";
 
 dotenv.config();
 
@@ -17,7 +20,9 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", service: "mindvault-backend" });
 });
 
-// TODO: wire routes/notes and routes/search
+// API routes
+app.use("/api/notes", notesRouter);
+app.use("/api/search", searchRouter);
 
 // 404 handler
 app.use((req, res) => {
@@ -30,6 +35,13 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Internal Server Error" });
 });
 
-app.listen(port, () => {
-  console.log(`MindVault backend running on http://localhost:${port}`);
-});
+connectDb()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`MindVault backend running on http://localhost:${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+    process.exit(1);
+  });
