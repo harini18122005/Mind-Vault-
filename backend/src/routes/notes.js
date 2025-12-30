@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getCollection } from "../config/db.js";
+import { generateEmbedding } from "../services/openai.js";
 
 const router = Router();
 
@@ -25,11 +26,14 @@ router.post("/", async (req, res, next) => {
       return res.status(400).json({ error: "title and content are required" });
     }
 
+    // Generate embedding for semantic search
+    const embedding = await generateEmbedding(content);
+
     const doc = {
       title: String(title).trim(),
       content: String(content).trim(),
       tags: Array.isArray(tags) ? tags.map(String) : [],
-      embedding: null, // to be filled after OpenAI integration
+      embedding,
       createdAt: new Date(),
     };
 
