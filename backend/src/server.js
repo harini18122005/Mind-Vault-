@@ -4,7 +4,6 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import notesRouter from "./routes/notes.js";
 import searchRouter from "./routes/search.js";
-import { connectDb } from "./config/db.js";
 
 dotenv.config();
 
@@ -35,17 +34,8 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Internal Server Error" });
 });
 
-// Start server first, then try to connect to MongoDB in background
+// Start server immediately (no DB blocking)
 app.listen(port, () => {
   console.log(`MindVault backend running on http://localhost:${port}`);
+  console.log("Using in-memory database with JSON persistence");
 });
-
-// Connect to MongoDB (don't block server startup)
-connectDb()
-  .then(() => {
-    console.log("MongoDB connected successfully");
-  })
-  .catch((err) => {
-    console.error("Failed to connect to MongoDB:", err.message);
-    console.log("Server running without database connection");
-  });

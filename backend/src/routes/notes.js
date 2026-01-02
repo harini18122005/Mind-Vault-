@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCollection } from "../config/db.js";
+import { getAllNotes, createNote } from "../config/mockDb.js";
 import { generateEmbedding } from "../services/openai.js";
 
 const router = Router();
@@ -7,11 +7,7 @@ const router = Router();
 // List notes
 router.get("/", async (_req, res, next) => {
   try {
-    const notesCol = await getCollection("notes");
-    const notes = await notesCol
-      .find({}, { projection: { title: 1, content: 1, tags: 1, createdAt: 1 } })
-      .sort({ createdAt: -1 })
-      .toArray();
+    const notes = getAllNotes();
     res.json({ data: notes });
   } catch (err) {
     next(err);
@@ -39,12 +35,10 @@ router.post("/", async (req, res, next) => {
       content: String(content).trim(),
       tags: Array.isArray(tags) ? tags.map(String) : [],
       ...(embedding && { embedding }),
-      createdAt: new Date(),
     };
 
-    const notesCol = await getCollection("notes");
-    const result = await notesCol.insertOne(doc);
-    res.status(201).json({ id: result.insertedId, ...doc });
+    const note = createNote(doc);
+    res.status(201).json(note);
   } catch (err) {
     next(err);
   }
