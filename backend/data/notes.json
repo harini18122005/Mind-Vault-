@@ -1,5 +1,16 @@
 [
   {
+    "_id": "oxu8tuqsd",
+    "title": "Interview Preparation",
+    "content": "Practice explaining the MindVault architecture: Next.js frontend with Tailwind CSS, Express backend API, in-memory JSON database, OpenAI integration for embeddings. Key features include create/read/search notes, semantic search capabilities, and graceful fallbacks when services are unavailable.",
+    "tags": [
+      "interview",
+      "preparation",
+      "mindvault"
+    ],
+    "createdAt": "2026-01-02T04:10:15.434Z"
+  },
+  {
     "_id": "iyz6i5277",
     "title": "AI-Powered Note-Taking System",
     "content": "MindVault is a semantic note-taking application that leverages OpenAI embeddings for intelligent search. Users can create notes with automatic semantic indexing, search by meaning rather than keywords, and organize content with custom tags. The system uses vector search for advanced retrieval and falls back to text-based search for reliability.",
@@ -13,14 +24,65 @@
     "createdAt": "2026-01-02T04:08:55.272Z"
   },
   {
-    "_id": "oxu8tuqsd",
-    "title": "Interview Preparation",
-    "content": "Practice explaining the MindVault architecture: Next.js frontend with Tailwind CSS, Express backend API, in-memory JSON database, OpenAI integration for embeddings. Key features include create/read/search notes, semantic search capabilities, and graceful fallbacks when services are unavailable.",
+    "_id": "f9nlcuyqn",
+    "title": "System Architecture Overview",
+    "content": "MindVault uses a three-tier architecture with Next.js frontend, Express backend, and in-memory JSON database. The frontend communicates with the backend API via REST endpoints. Each note is stored with metadata including creation timestamp, tags, and optional AI embeddings for semantic search capabilities.",
     "tags": [
-      "interview",
-      "preparation",
-      "mindvault"
+      "architecture",
+      "system-design",
+      "backend"
     ],
-    "createdAt": "2026-01-02T04:10:15.434Z"
+    "createdAt": "2026-01-02T04:38:49.474Z"
+  },
+  {
+    "_id": "xw8vr3pkx",
+    "title": "Performance Optimization Tips",
+    "content": "Cache frequently accessed data in React using useState and useEffect hooks. Use Next.js image optimization for faster load times. Implement pagination for large note lists. Debounce search inputs to reduce API calls. Use CSS Tailwind classes for faster styling without custom CSS files.",
+    "tags": [
+      "performance",
+      "optimization",
+      "react"
+    ],
+    "createdAt": "2026-01-02T04:41:05.196Z"
+  },
+  {
+    "_id": "irmkbbn84",
+    "title": "My New Year Resolutions",
+    "content": "Start exercising 3 times a week. Read one book per month. Learn a new programming language. Save money for a vacation. Spend more time with family. Practice meditation daily for mental health. Cook new recipes every weekend.",
+    "tags": [
+      "personal",
+      "goals",
+      "2026"
+    ],
+    "createdAt": "2026-01-02T04:44:04.062Z"
+  },
+  {
+    "_id": "cyvmf5xq5",
+    "title": "Weekend Plans",
+    "content": "Saturday morning - go for a run in the park. Afternoon - catch up with friends at coffee shop. Evening - watch a movie. Sunday - grocery shopping, meal prep for the week, relax at home.",
+    "tags": [
+      "personal",
+      "weekend",
+      "plans"
+    ],
+    "createdAt": "2026-01-02T04:45:39.745Z"
+  },
+  {
+    "_id": "1arp7hln1",
+    "title": "\"nature adventure\"",
+    "content": "\"I had a wonderful experience hiking in mountains\"",
+    "tags": [
+      "pesonal"
+    ],
+    "createdAt": "2026-01-02T05:07:06.346Z"
+  },
+  {
+    "_id": "zc0j6tn94",
+    "title": "games",
+    "content": "outdoor activities, indoor activities.",
+    "tags": [
+      "personal"
+    ],
+    "createdAt": "2026-01-02T05:21:01.974Z"
   }
 ]
