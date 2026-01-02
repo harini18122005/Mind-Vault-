@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "iyz6i5277",
+    "title": "AI-Powered Note-Taking System",
+    "content": "MindVault is a semantic note-taking application that leverages OpenAI embeddings for intelligent search. Users can create notes with automatic semantic indexing, search by meaning rather than keywords, and organize content with custom tags. The system uses vector search for advanced retrieval and falls back to text-based search for reliability.",
+    "tags": [
+      "project",
+      "ai",
+      "semantic-search",
+      "notetaking",
+      "openai"
+    ],
+    "createdAt": "2026-01-02T04:08:55.272Z"
+  },
+  {
+    "_id": "oxu8tuqsd",
+    "title": "Interview Preparation",
+    "content": "Practice explaining the MindVault architecture: Next.js frontend with Tailwind CSS, Express backend API, in-memory JSON database, OpenAI integration for embeddings. Key features include create/read/search notes, semantic search capabilities, and graceful fallbacks when services are unavailable.",
+    "tags": [
+      "interview",
+      "preparation",
+      "mindvault"
+    ],
+    "createdAt": "2026-01-02T04:10:15.434Z"
+  }
+]

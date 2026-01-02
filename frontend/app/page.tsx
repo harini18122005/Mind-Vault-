@@ -11,9 +11,11 @@ export default function Home() {
   const [loadingNotes, setLoadingNotes] = useState(true);
   const [searchResults, setSearchResults] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Load all notes on mount
   useEffect(() => {
+    setMounted(true);
     loadAllNotes();
   }, []);
 
@@ -49,6 +51,21 @@ export default function Home() {
 
   const displayNotes = searchResults?.data || notes;
   const displayLoading = loadingNotes;
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <header className="bg-white shadow-md sticky top-0 z-50">
+          <div className="max-w-5xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
+              🧠 MindVault
+            </h1>
+          </div>
+        </header>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
