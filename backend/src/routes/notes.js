@@ -26,14 +26,19 @@ router.post("/", async (req, res, next) => {
       return res.status(400).json({ error: "title and content are required" });
     }
 
-    // Generate embedding for semantic search
-    const embedding = await generateEmbedding(content);
+    // Generate embedding for semantic search (optional - skip if OpenAI unavailable)
+    let embedding = null;
+    try {
+      embedding = await generateEmbedding(content);
+    } catch (embErr) {
+      console.warn("Embedding generation failed (likely quota issue), saving note without embedding:", embErr.message);
+    }
 
     const doc = {
       title: String(title).trim(),
       content: String(content).trim(),
       tags: Array.isArray(tags) ? tags.map(String) : [],
-      embedding,
+      ...(embedding && { embedding }),
       createdAt: new Date(),
     };
 

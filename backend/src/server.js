@@ -35,13 +35,17 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Internal Server Error" });
 });
 
+// Start server first, then try to connect to MongoDB in background
+app.listen(port, () => {
+  console.log(`MindVault backend running on http://localhost:${port}`);
+});
+
+// Connect to MongoDB (don't block server startup)
 connectDb()
   .then(() => {
-    app.listen(port, () => {
-      console.log(`MindVault backend running on http://localhost:${port}`);
-    });
+    console.log("MongoDB connected successfully");
   })
   .catch((err) => {
-    console.error("Failed to connect to MongoDB", err);
-    process.exit(1);
+    console.error("Failed to connect to MongoDB:", err.message);
+    console.log("Server running without database connection");
   });

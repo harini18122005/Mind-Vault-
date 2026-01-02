@@ -11,8 +11,31 @@ router.post("/", async (req, res, next) => {
     const { query, limit = 10 } = req.body || {};
     if (!query) return res.status(400).json({ error: "query is required" });
 
-    const embedding = await generateEmbedding(query);
+    let embedding;
+    try {
+      embedding = await generateEmbedding(query);
+    } catch (embErr) {
+      console.warn("Embedding generation failed, using regex fallback:", embErr.message);
+      // Fall through to regex search below
+    }
     const notesCol = await getCollection("notes");
+
+    // If no embedding, skip vector search and use regex directly
+    if (!embedding) {
+      const fallback = await notesCol
+        .find({ content: { $regex: query, $options: "i" } }, {
+          projection: { title: 1, content: 1, tags: 1, createdAt: 1 },
+        })
+        .limit(Number(limit) || 10)
+        .toArray();
+
+      return res.json({
+        query,
+        count: fallback.length,
+        data: fallback,
+        note: "OpenAI quota exceeded; used regex search fallback",
+      });
+    }
 
     // Use $vectorSearch; if not available (local Mongo), fall back to regex search
     const pipeline = [
